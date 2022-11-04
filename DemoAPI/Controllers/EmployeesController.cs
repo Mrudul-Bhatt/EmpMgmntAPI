@@ -42,7 +42,7 @@ namespace DemoAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEmployee(AddEmployeeRequest request)
+        public async Task<IActionResult> AddEmployee([FromBody] AddEmployeeRequest request)
         {
             var employee = new Employee()
             {
@@ -57,7 +57,7 @@ namespace DemoAPI.Controllers
             await demoDbContext.Employees.AddAsync(employee);
             await demoDbContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetEmployeeById), new { id = employee.Id }, employee);
+            return Ok(employee);
         }
 
         [HttpPut]
